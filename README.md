@@ -81,6 +81,10 @@ POST-Request to `https://api-us.bluegogo.com/nearbyBikes?data={"token":"","versi
 
 All APIs and data are also listed on `https://www.motivateco.com/use-our-data/`
 
+Motivate also has undocumented APIs in the GeoJSON format. URLs might be tricky to divine for other cities, but Washington DC & NYC are:
+ * https://layer.bicyclesharing.net/map/v1/wdc/map-inventory
+ * https://layer.bicyclesharing.net/map/v1/nyc/map-inventory
+
 ## BYKE (Germany)
 
 Simple GET-Request example: `https://api-prod.ibyke.io/v1/bikes?latitude=52.55001&longitude=13.40902&order=nearby`
@@ -97,7 +101,9 @@ Simple GET-Request example: `https://api-prod.ibyke.io/v1/bikes?latitude=52.5500
 
 [JUMP](http://jumpbikes.com/) operates electric dockless bikeshares in Washington, DC & San
 Francisco. They operate open data APIs at https://dc.jumpmobility.com/opendata
-and https://sf.jumpmobility.com/opendata respectively.
+and https://sf.jumpbikes.com/opendata respectively.
+
+Also see https://github.com/Leschonander/Jump-Bike-D.C-Python-API-Wrapper
 
 ## SocialBicycles (USA, Canada, Czech Republic, Poland)
 
@@ -112,6 +118,8 @@ and https://sf.jumpmobility.com/opendata respectively.
 ## OnzO (New Zealand)
 
 Simple GET request: https://app.onzo.co.nz/nearby/-36.848123/174.765588/50.0
+
+[Detailed documentation](Onzo.md)
 
 ## Spin (Bikes and Scooter)
 
@@ -183,6 +191,26 @@ For more information about bikes in a specific city, you'll need the city ID (fo
 List of stations in a city and station metadata: `https://zapi.zagster.com/api/v1/bikeshares/[City ID]/stations`
 
 List of bikes in a city and bike metadata: `https://zapi.zagster.com/api/v1/bikeshares/[City ID]/bikes`
+
+## EUBIKE (Sweden)
+
+[EUBIKE](http://eubike.se) is a Swedish bike rental company with dock-less rentals. The user scans a QR-code located on the bike´s lock to unlock it. To perform a simply search for bikes, you can send a POST request to this URL:
+`http://47.91.87.181:8080/UserApi/AppUser?lng=18.0668918788433075&lat=59.3109666242335791&cmd=areabike&dist=0.5`
+The IP address is an Alibaba Cloud Server located in Germany used by the EUBIKE mobile app itself.
+A sample response for the request above is:
+`{"success":true,"data":[{"devid":"10002165","shebeistatus":0,"devlat":59.31163,"devlng":18.06885,"devpower":0,"dist":0.133420259},{"devid":"10000991","shebeistatus":0,"devlat":59.30986,"devlng":18.06548,"devpower":0,"dist":0.147037461},{"devid":"10001231","shebeistatus":0,"devlat":59.3098221,"devlng":18.0654163,"devpower":0,"dist":0.15217796},{"devid":"10001958","shebeistatus":0,"devlat":59.3130035,"devlng":18.0675964,"devpower":0,"dist":0.230080515},{"devid":"10001357","shebeistatus":0,"devlat":59.31213,"devlng":18.0620575,"devpower":0,"dist":0.303918362},{"devid":"10002477","shebeistatus":0,"devlat":59.3123932,"devlng":18.0622749,"devpower":0,"dist":0.306723356}...],"maparea" : []`
+
+This endpoint is more well-documented in the file 
+[EUBike.md](EUBike.md).
+
+## VOI (Europe)
+[VOI](https://voiscooters.com) is a scooter sharing company founded in Sweden. They have electric scooters available at several locations in Europe, including cities in Sweden, Spain, Italy, France and others. A simple GET request to get scooters available for rental nearby a location (specified with latitude/longtitude parameters) looks like this:
+
+`https://api.voiapp.io/v1/vehicle/status/ready?la=59.329323&lo=18.068581`
+
+(**no authentication is needed**)
+
+The request will return data about scooters in a list with JSON objects. More detailed documentation as well as an explaination of most of the request and response parameters can be found in the file [Voi.md](Voi.md).
 
 ## More...
 
